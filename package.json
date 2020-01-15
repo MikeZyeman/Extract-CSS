@@ -1,0 +1,15 @@
+{
+  "name": "extract-css",
+  "version": "1.0.0",
+  "description": "A npm package, that extracts css files and provides it as a json object",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc && node ./dist/extract-css.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "stylesheet", ""
+  ],
+  "author": "Mike Zyeman",
+  "license": "ISC"
+}
