@@ -1,12 +1,13 @@
+import StyleFile, {File, Media, Element, Class, ID} from './syntaxes/css.syntaxes';
 
+import * as fs from 'fs-extra';
 
-class CSSFile {
-    constructor() {
+export default class ExtractCSS implements File {
 
-    }
-}
-
-export default class ExtractCSS {
+    Medias: Media[] = [];
+    Elements: Element[] = [];
+    Classes: Class[] = [];
+    IDs: ID[] = [];
 
     static PATH: string = "";
     private _pathToFile: string = "";
@@ -17,6 +18,9 @@ export default class ExtractCSS {
 
     set pathToFile(path: string) {
         this._pathToFile = path;
+        
+        let content = fs.readFileSync(path, 'base64');
+        console.log(content);
 
     }
 
