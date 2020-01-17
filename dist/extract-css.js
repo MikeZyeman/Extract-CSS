@@ -22,8 +22,23 @@ class ExtractCSS {
     }
     set pathToFile(path) {
         this._pathToFile = path;
-        let content = fs.readFileSync(path, 'base64');
-        console.log(content);
+        fs.readFile(path, 'utf8').then((data) => {
+            const array = data.split('\n');
+            array.map((element) => {
+                element.replace(/^ */g, '');
+                element.replace(/\r/g, '');
+                console.log(element);
+                return element;
+            });
+            /*
+            this.Elements = CSSFile.getElements(array);
+            this.IDs = CSSFile.getIDs(array);
+            this.Classes = CSSFile.getClasses(array);
+            this.Medias = CSSFile.getMedias(array);
+            */
+        }).catch((err) => {
+            console.log(err);
+        });
     }
 }
 exports.default = ExtractCSS;
