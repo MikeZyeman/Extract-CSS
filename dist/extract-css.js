@@ -1,4 +1,7 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -7,13 +10,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const css_syntaxes_1 = __importDefault(require("./syntaxes/css.syntaxes"));
 const fs = __importStar(require("fs-extra"));
 class ExtractCSS {
     constructor(path = "") {
-        this.Medias = [];
-        this.Elements = [];
-        this.Classes = [];
-        this.IDs = [];
+        this.Medias = {
+            query: '',
+            Elements: {},
+            Classes: {},
+            IDs: {},
+        };
+        this.Elements = {};
+        this.Classes = {};
+        this.IDs = {};
         this._pathToFile = "";
         this.pathToFile = path;
     }
@@ -22,25 +31,18 @@ class ExtractCSS {
     }
     set pathToFile(path) {
         this._pathToFile = path;
-        fs.readFile(path, 'utf8').then((data) => {
-            const array = data.split('\n');
-            array.map((element) => {
-                element.replace(/^ */g, '');
-                element.replace(/\r/g, '');
-                console.log(element);
-                return element;
-            });
-            /*
-            this.Elements = CSSFile.getElements(array);
-            this.IDs = CSSFile.getIDs(array);
-            this.Classes = CSSFile.getClasses(array);
-            this.Medias = CSSFile.getMedias(array);
-            */
-        }).catch((err) => {
-            console.log(err);
+        fs.readFile(path, 'utf8', (error, data) => {
+            if (error)
+                throw new Error('something went wrong');
+            const array = data.split('\n').map((element) => element.replace(/^\s*/g, ''));
+            this.Elements = css_syntaxes_1.default.getElements(array);
+            this.IDs = css_syntaxes_1.default.getIDs(array);
+            this.Classes = css_syntaxes_1.default.getClasses(array);
+            this.Medias = css_syntaxes_1.default.getMedias(array);
+            console.log(this.Classes);
         });
     }
 }
-exports.default = ExtractCSS;
 ExtractCSS.PATH = "";
+exports.default = ExtractCSS;
 //# sourceMappingURL=extract-css.js.map

@@ -1,29 +1,27 @@
-
-
-interface Styles {
+interface CSSStyle {
     [key: string]: string | number;
 }
-interface Element {
-    [key: string]: Styles;
+interface CSSElement {
+    [key: string]: CSSStyle;
 }
-interface Class extends Element { 
+interface CSSClass extends CSSElement { 
 
 };
-interface ID extends Element { 
+interface CSSID extends CSSElement { 
 
 };
 
-interface Media {
+interface CSSMedia {
     query: string;
-    Elements: Element[];
-    Classes: Class[];
-    IDs: ID[];
+    Elements: CSSElement;
+    Classes: CSSClass;
+    IDs: CSSID;
 }
 interface File {
-    Medias: Media[];
-    Elements: Element[];
-    Classes: Class[];
-    IDs: ID[];
+    Medias?: CSSMedia;
+    Elements: CSSElement;
+    Classes: CSSClass;
+    IDs: CSSID;
 }
 
 interface PosSpan {
@@ -33,58 +31,81 @@ interface PosSpan {
 
 export default class CSSFile  {
 
-    static getMedias(css: string[]): Media[] {
-        let PosIndex: PosSpan[] = this.getBracketsIndex(css),
-            medias: Media[] = [];
+    static getMedias(css: string[]): CSSMedia {
+        let posIndex: PosSpan[] = this.getBracketsIndex(css),
+            medias: CSSMedia = {
+                query: '',
+                Elements: {},
+                Classes: {},
+                IDs: {},
+            };
         const mediaStart = /^@media/gm;
 
-        PosIndex.forEach((pos) => {
+        posIndex.forEach((pos) => {
             if (css[pos.start].match(mediaStart)) {
-                console.log(css[pos.start])
+                
             }
         })
 
         return medias;
     }
 
-    static getClasses(css: string[]): Class[] {
-        let PosIndex: PosSpan[] = this.getBracketsIndex(css),
-            classes: Class[] = [];
-        const classStart = /\./gm;
+    static getClasses(css: string[]): CSSClass {
+        let posIndex: PosSpan[] = this.getBracketsIndex(css),
+            classes: CSSClass = {};
 
-        PosIndex.forEach((pos) => {
-            if (css[pos.start].match(classStart)) {
-                console.log(css.slice(pos.start, pos.end + 1))
+        posIndex.forEach((pos) => {
+            if (css[pos.start].match(/\./gm)) {
+                let classstyles: any = {};
+                let name = css[pos.start].replace(/^(\.)|( \{)$/g, '');
 
-                console.log()
+                css.slice(pos.start + 1, pos.end).forEach((style) => {
+                    let [key, value] = style.split(": ").map((s) => s.replace(/[;-]/g, ''));
+                    classstyles[key] = value;
+                })                
+                classes[name] = classstyles;
             }
         })
 
         return classes;
     }
 
-    static getElements(css: string[]): Element[] {
-        let PosIndex: PosSpan[] = this.getBracketsIndex(css),
-            elements: Element[] = [];
-        const idStart = /^[a-zA-Z]/gm;
+    static getElements(css: string[]): CSSElement {
+        let posIndex: PosSpan[] = this.getBracketsIndex(css),
+            elements: CSSElement = {};
 
-        PosIndex.forEach((pos) => {
-            if (css[pos.start].match(idStart)) {
+        posIndex.forEach((pos) => {
+            if (css[pos.start].match(/^[a-zA-Z]/gm)) {
+                let elstyles: any = {};
+                let name = css[pos.start].replace(/( \{)/g, '')
 
+                css.slice(pos.start + 1, pos.end).forEach((style) => {
+                    let [key, value] = style.split(": ").map((s) => s.replace(/[;-]/g, ''));
+                    elstyles[key] = value;
+                }) 
+
+                elements[name] = elstyles;
             }
         })
 
         return elements;
     }
 
-    static getIDs(css: string[]): ID[] {
-        let PosIndex: PosSpan[] = this.getBracketsIndex(css),
-            ids: ID[] = [];
-        const idStart = /\#/gm;
+    static getIDs(css: string[]): CSSID {
+        let posIndex: PosSpan[] = this.getBracketsIndex(css),
+            ids: CSSID = {};
 
-        PosIndex.forEach((pos) => {
-            if (css[pos.start].match(idStart)) {
-                    
+        posIndex.forEach((pos) => {
+            if (css[pos.start].match(/\#/gm)) {
+                let idstyles: any = {};
+                let name = css[pos.start].replace(/^(\#)|( \{)$/g, '');
+
+                css.slice(pos.start + 1, pos.end).forEach((style) => {
+                    let [key, value] = style.split(": ").map((s) => s.replace(/[;-]/g, ''))
+                    idstyles[key] = value;
+                })
+                ids[name] = idstyles;
+
             }
         })
 
@@ -127,6 +148,6 @@ export default class CSSFile  {
 }
 
 export {
-    File, Media, Class, ID, Element, Styles
+    File, CSSMedia, CSSClass, CSSID, CSSElement, CSSStyle
 }
 

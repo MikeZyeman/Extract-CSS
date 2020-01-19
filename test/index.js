@@ -1,3 +1,5 @@
 let ExtractCSS = require('../dist/extract-css').default;
 
-new ExtractCSS("./test/index.css");
+const IndexCSS = new ExtractCSS("./test/index.css");
+
+console.log(IndexCSS);
