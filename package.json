@@ -1,15 +1,15 @@
 {
-  "name": "extract-css",
-  "version": "1.0.0",
+  "name": "extract-style",
+  "version": "1.0.2",
   "description": "A npm package, that extracts css files and provides it as a json object",
-  "main": "index.js",
+  "main": "./dist/extract-css.js",
   "scripts": {
     "dev": "tsc && npm run test",
     "test": "node ./test/index.js"
   },
   "keywords": [
-    "stylesheet",
-    ""
+    "style",
+    "css"
   ],
   "author": "Mike Zyeman",
   "license": "ISC",
