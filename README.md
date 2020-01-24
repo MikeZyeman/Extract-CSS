@@ -5,7 +5,7 @@ This package is for extracting css classes, ids and elements and providing them 
 ## Installation
 
 ```
-npm install @types/d3 --save-dev
+npm i extract-style
 ```
 
 ## How to use
