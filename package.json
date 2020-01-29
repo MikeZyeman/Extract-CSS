@@ -12,7 +12,13 @@
     "css"
   ],
   "author": "Mike Zyeman",
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MikeZyeman/Extract-CSS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MikeZyeman/Extract-CSS/issues"
+  },
   "license": "ISC",
   "dependencies": {
     "@types/fs-extra": "^8.0.1",
