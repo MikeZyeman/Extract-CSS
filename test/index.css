@@ -9,10 +9,10 @@
     justify-content: center;
 }
 
-.hahaha {
+#ExampleId {
     background-color: aqua;
 }
 
-#Head {
+h1 {
     font-size: 30px;
 }
