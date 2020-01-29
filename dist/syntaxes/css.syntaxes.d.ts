@@ -26,7 +26,6 @@ export default class CSSFile {
     static getElements(css: string[]): CSSElement;
     static getIDs(css: string[]): CSSID;
     private static getBracketsIndex;
-    private static getArray;
 }
 export { File, CSSMedia, CSSClass, CSSID, CSSElement, CSSStyle };
 //# sourceMappingURL=css.syntaxes.d.ts.map

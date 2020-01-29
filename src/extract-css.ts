@@ -2,48 +2,25 @@ import CSSFile, {File, CSSMedia, CSSElement, CSSClass, CSSID} from './syntaxes/c
 
 import * as fs from 'fs-extra';
 
-export default class ExtractCSS implements File {
+export async function ExtractCSS(path: string = '') {
+    
+    console.log(path);
 
-    Medias: CSSMedia = {
-        query: '',
-        Elements: {},
-        Classes: {},
-        IDs: {},
+    const raw = await fs.readFile(path, 'utf8')
+
+    const array = raw.split('\n').map((element) => element.replace(/^\s*/g, ''));
+
+    const Elements = CSSFile.getElements(array);
+    const IDs = CSSFile.getIDs(array);
+    const Classes = CSSFile.getClasses(array);
+    const Medias = CSSFile.getMedias(array);
+
+    return {
+        Elements: Elements,
+        IDs: IDs,
+        Classes: Classes,
+        Medias: Medias
     }
-    Elements: CSSElement = {};
-    Classes: CSSClass = {};
-    IDs: CSSID = {};
-
-    static PATH: string = "";
-    private _pathToFile: string = "";
-
-    get pathToFile(): string {
-        return this._pathToFile;
-    }
-
-    set pathToFile(path: string) {
-        this._pathToFile = path;
-        
-        fs.readFile(path, 'utf8', (error, data) => {
-
-            if (error) throw new Error('something went wrong');
-
-            const array = data.split('\n').map((element) => element.replace(/^\s*/g, ''));
-
-            this.Elements = CSSFile.getElements(array);
-            this.IDs = CSSFile.getIDs(array);
-            this.Classes = CSSFile.getClasses(array);
-            this.Medias = CSSFile.getMedias(array);
-
-            console.log(this.Classes);
-        })
-    }
-
-    constructor(path: string = "") {
-        this.pathToFile = path
-
-    }
-
 }
 
 

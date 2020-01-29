@@ -43,7 +43,7 @@ export default class CSSFile  {
 
         posIndex.forEach((pos) => {
             if (css[pos.start].match(mediaStart)) {
-                
+
             }
         })
 
@@ -138,12 +138,6 @@ export default class CSSFile  {
         }
 
         return PosIndex;
-    }
-
-    private static getArray(): String[] {
-
-
-        return [];
     }
 }
 

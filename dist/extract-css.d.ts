@@ -1,12 +1,8 @@
-import { File, CSSMedia, CSSElement, CSSClass, CSSID } from './syntaxes/css.syntaxes';
-export default class ExtractCSS implements File {
-    Medias: CSSMedia;
+import { CSSMedia, CSSElement, CSSClass, CSSID } from './syntaxes/css.syntaxes';
+export declare function ExtractCSS(path?: string): Promise<{
     Elements: CSSElement;
-    Classes: CSSClass;
     IDs: CSSID;
-    static PATH: string;
-    private _pathToFile;
-    pathToFile: string;
-    constructor(path?: string);
-}
+    Classes: CSSClass;
+    Medias: CSSMedia;
+}>;
 //# sourceMappingURL=extract-css.d.ts.map

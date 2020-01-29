@@ -83,9 +83,6 @@ class CSSFile {
         }
         return PosIndex;
     }
-    static getArray() {
-        return [];
-    }
 }
 exports.default = CSSFile;
 //# sourceMappingURL=css.syntaxes.js.map
