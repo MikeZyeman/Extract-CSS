@@ -4,8 +4,6 @@ import * as fs from 'fs-extra';
 
 export async function ExtractCSS(path: string = '') {
     
-    console.log(path);
-
     const raw = await fs.readFile(path, 'utf8')
 
     const array = raw.split('\n').map((element) => element.replace(/^\s*/g, ''));
