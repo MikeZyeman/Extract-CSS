@@ -1,4 +1,4 @@
-import CSSFile, {File, CSSMedia, CSSElement, CSSClass, CSSID} from './syntaxes/css.syntaxes';
+import CSSFile, {File, CSSMedia, CSSElement, CSSClass, CSSID} from './syntaxes/css.syntax';
 
 import * as fs from 'fs-extra';
 
