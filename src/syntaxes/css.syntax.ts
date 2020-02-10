@@ -1,35 +1,6 @@
-interface CSSStyle {
-    [key: string]: string | number;
-}
-interface CSSElement {
-    [key: string]: CSSStyle;
-}
-interface CSSClass extends CSSElement { 
+import {CSSStyle, CSSElement, CSSClass, CSSID, CSSMedia, CSSFile, PosSpan} from '../models/css.Models'
 
-};
-interface CSSID extends CSSElement { 
-
-};
-
-interface CSSMedia {
-    query: string;
-    Elements: CSSElement;
-    Classes: CSSClass;
-    IDs: CSSID;
-}
-interface File {
-    Medias?: CSSMedia;
-    Elements: CSSElement;
-    Classes: CSSClass;
-    IDs: CSSID;
-}
-
-interface PosSpan {
-    start: number;
-    end: number;
-}
-
-export default class CSSFile  {
+export default class CSSObject  {
 
     static getMedias(css: string[]): CSSMedia {
         let posIndex: PosSpan[] = this.getBracketsIndex(css),
@@ -139,9 +110,5 @@ export default class CSSFile  {
 
         return PosIndex;
     }
-}
-
-export {
-    File, CSSMedia, CSSClass, CSSID, CSSElement, CSSStyle
 }
 
